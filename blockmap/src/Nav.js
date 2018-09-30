@@ -6,37 +6,38 @@ import {GoogleApi} from 'google-maps-react'
 class Nav extends Component {
 
 	state={
-		currentNav:'nav',
 		query: ''
 	};
 	updateQuery(query) {
-		// if(query.trim()!=='') {
-		// 	this.setState({value: query.trim()})
-		// }
+		this.setState({query: query});
+		if(query.trim()!=='') {
+			// this.setState({value: query.trim()})
+			console.log('query is not none');
+		}
 	}
 
-	// geocodeAddress(google,geocoder, resultsMap) {
- //        var address = document.getElementById('searchBox').value;
+	geocodeAddress(google,geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
 
- //        geocoder.geocode({'address': address}, function(results, status) {
- //          if (status === google.maps.GeocoderStatus.OK) {
- //            resultsMap.setCenter(results[0].geometry.location);
- //            //TODO: Insert code here to take the first result's formatted address, and LOCATION.
- //            var marker = new google.maps.Marker({
- //              map: resultsMap,
- //              position: results[0].geometry.location
- //            });
- //            results[0].formatted_address; // PUT STUFF HERE 
- //            results[0].geometry.location; // PUT STUFF HERE
- //          } else {
- //            alert('Geocode was not successful for the following reason: ' + status);
- //          }
- //        });
- //      }
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            //TODO: Insert code here to take the first result's formatted address, and LOCATION.
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            results[0].formatted_address; // PUT STUFF HERE 
+            results[0].geometry.location; // PUT STUFF HERE
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
 
 	render() {
-		console.log(this.props.navBar);
-		console.log(this.props.google);
+		// console.log(this.props.navBar);
+		// console.log(this.props.google);
 		var google=this.props.google;
 
         var geocoder = new google.maps.Geocoder();
@@ -47,7 +48,8 @@ class Nav extends Component {
 				<div>
 					<h2>ShenZhen Locations</h2>
 					<div id="searchBox">
-						<input 
+						<input
+							id="address"
 							type="text" 
 							value={this.state.query}
 							placeholder="Station location"
