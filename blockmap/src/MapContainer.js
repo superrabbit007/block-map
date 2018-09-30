@@ -60,7 +60,10 @@ class MapContainer extends Component {
 	            google={this.props.google}
 	            zoom={14}
 	            style={style}
-	            initialCenter={this.props.center}
+	            center={{
+	              lat: 22.543096, 
+	              lng: 114.05786499999999
+	            }}
 	            bounds={bounds}>
 
 				{locations.map((loc,index)=>( 

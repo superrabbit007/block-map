@@ -13,16 +13,21 @@ const style = {
   position: 'absolute'
 };
 
-const center ={
-                lat: 22.543096, 
-                lng: 114.05786499999999
-              }
+// const center ={
+//                 lat: 22.543096, 
+//                 lng: 114.05786499999999
+//               }
 
 
 
 class App extends Component {
   state={
-    showingNav: false
+    showingNav: false,
+    center :{
+                lat: 22.543096, 
+                lng: 114.05786499999999},
+
+    marker: {}
   }
 
   showingNav(show) {
@@ -35,20 +40,41 @@ class App extends Component {
     }
   }
 
+  mapChange(local) {
+    console.log(local);
+    if(local!== this.state.center) {
+      this.setState({
+        center: local
+      })
+    }
+  }
+
+  // setMarker(loc) {
+  //   console.log(loc);
+  //   this.setState({marker: loc})
+  // }
+
+
   render() {
     
     return (
       <div id="container">
         <Nav 
           navBar={this.state.showingNav}
-          mapCenter={center}/>
+          mapCenter={this.state.center}
+          google={window.google}
+          changeMapCenter={(local)=>this.mapChange(local)}
+          setMarker={(loc)=>this.setMarker(loc)}
+          />
         <div className="main">
           <Menu
             navChange={(show)=>this.showingNav(show)}/>
           <div className="map">
               <MapContainer
-               center={center}/>
+               center={this.state.center}
+               />
           </div>
+          <div id="secondComponent"></div>
         </div>
       </div>
     );
@@ -59,3 +85,4 @@ class App extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyAbUCvFRJ7Q68Y1fvtm1eW5zfaQsqT6FTk'
 })(App);
+//dl

@@ -17,18 +17,24 @@ class Nav extends Component {
 	}
 
 	geocodeAddress(google,geocoder, resultsMap) {
+		console.log(this.props);
+		var self = this.props;
+		console.log(self);
         var address = document.getElementById('address').value;
 
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
-            resultsMap.setCenter(results[0].geometry.location);
-            //TODO: Insert code here to take the first result's formatted address, and LOCATION.
+          	console.log(results[0]);
+          	// self.changeMapCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
             });
-            results[0].formatted_address; // PUT STUFF HERE 
-            results[0].geometry.location; // PUT STUFF HERE
+            self.setMarker(results[0]);
+            // results[0].formatted_address; 
+            // results[0].geometry.location; 
+            document.getElementById('secondComponent').innerHTML="The Location is" + 
+            results[0].geometry.location;
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
