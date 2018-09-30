@@ -40,7 +40,8 @@ class App extends Component {
     return (
       <div id="container">
         <Nav 
-          navBar={this.state.showingNav}/>
+          navBar={this.state.showingNav}
+          mapCenter={center}/>
         <div className="main">
           <Menu
             navChange={(show)=>this.showingNav(show)}/>
