@@ -18,14 +18,21 @@ class MapContainer extends Component {
 		selectedPlace:{}
 	};
 	
-
+	componentWillReceiveProps(props) {
+		this.setState({
+			selectedPlace: props,
+			activeMarker: {},
+			showingInfoWindow:true
+		});
+	}
 	onMouseoverMarker() {
 
 	};
 
-
-	onMarkerClick(props,marker,e) {
-		console.log(props);
+//这里测试看的时候，总是报错state 没有定义
+	onMarkerClick(props,marker) {
+		console.log(marker);
+		// console.log(e);
 		// this.setState({
 		// 	selectedPlace: props,
 		// 	activeMarker: marker,
@@ -60,10 +67,8 @@ class MapContainer extends Component {
 	            google={this.props.google}
 	            zoom={14}
 	            style={style}
-	            center={{
-	              lat: 22.543096, 
-	              lng: 114.05786499999999
-	            }}
+
+	            initialCenter={this.props.center}
 	            bounds={bounds}>
 
 				{locations.map((loc,index)=>( 
@@ -71,7 +76,7 @@ class MapContainer extends Component {
 	            		key={index}
 	            		title={loc.title}
 	            		position={loc.location}
-	            		onClick={this.onMarkerClick}
+	            		onClick={(event)=>this.onMarkerClick(event)}
 	            	/>
 	            		// onMouseoverMarker={this.onMouseoverMarker}/>
 	            ))}

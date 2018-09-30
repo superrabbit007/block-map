@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import {GoogleApiWrapper, Map} from 'google-maps-react';
 import Menu from './Menu';
-// import Main from './Main';
 import Nav from './Nav';
 import MapContainer from './MapContainer';
 
@@ -27,10 +26,11 @@ class App extends Component {
                 lat: 22.543096, 
                 lng: 114.05786499999999},
 
-    marker: {}
+    marker: {},
+    location: []
   }
 
-  showingNav(show) {
+  showingNav() {
     if(!this.state.showingNav) {
       this.setState({
         showingNav: true
@@ -54,9 +54,16 @@ class App extends Component {
   //   this.setState({marker: loc})
   // }
 
+  updateLocation(list) {
+    this.setState({
+      location: list
+    })
+
+  }
+
 
   render() {
-    
+ 
     return (
       <div id="container">
         <Nav 
@@ -65,16 +72,16 @@ class App extends Component {
           google={window.google}
           changeMapCenter={(local)=>this.mapChange(local)}
           setMarker={(loc)=>this.setMarker(loc)}
+          locationList={(list)=>this.updateLocation(list)}
           />
         <div className="main">
           <Menu
-            navChange={(show)=>this.showingNav(show)}/>
+            navChange={()=>this.showingNav()}/>
           <div className="map">
               <MapContainer
                center={this.state.center}
                />
           </div>
-          <div id="secondComponent"></div>
         </div>
       </div>
     );
@@ -82,7 +89,4 @@ class App extends Component {
 }
 
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAbUCvFRJ7Q68Y1fvtm1eW5zfaQsqT6FTk'
-})(App);
-//dl
+export default App;

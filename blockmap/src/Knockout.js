@@ -1,0 +1,1 @@
+var locationArray= ko.observableArray();

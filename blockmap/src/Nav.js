@@ -6,7 +6,8 @@ import {GoogleApi} from 'google-maps-react'
 class Nav extends Component {
 
 	state={
-		query: ''
+		query: '',
+		location: [],
 	};
 	updateQuery(query) {
 		this.setState({query: query});
@@ -16,33 +17,42 @@ class Nav extends Component {
 		}
 	}
 
-	geocodeAddress(google,geocoder, resultsMap) {
-		console.log(this.props);
-		var self = this.props;
-		console.log(self);
-        var address = document.getElementById('address').value;
+	// geocodeAddress(google,geocoder, resultsMap) {
+	// 	console.log(this.props);
+	// 	var self = this.props;
+	// 	var ll=this.state.location;
+	// 	console.log(self);
+ //        var address = document.getElementById('address').value;
 
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-          	console.log(results[0]);
-          	// self.changeMapCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-            self.setMarker(results[0]);
-            // results[0].formatted_address; 
-            // results[0].geometry.location; 
-            document.getElementById('secondComponent').innerHTML="The Location is" + 
-            results[0].geometry.location;
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
+ //        geocoder.geocode({'address': address}, function(results, status) {
+ //          if (status === google.maps.GeocoderStatus.OK) {
+ //          	console.log(results[0]);
+ //          	self.changeMapCenter(results[0].geometry.location);
+          	
+ //          	ll[this.state.i]=results[0];
+ //          	this.setState({i: this.state.i+1,
+ //          		location: ll
+ //          	});
+
+ //          	this.props.locationList(ll);
+
+ //            // var marker = new google.maps.Marker({
+ //            //   map: resultsMap,
+ //            //   position: results[0].geometry.location
+ //            // });
+ //            // self.setMarker(results[0]);
+ //            // results[0].formatted_address; 
+ //            // results[0].geometry.location; 
+ //            document.getElementById('secondComponent').innerHTML="The Location is" + 
+ //            results[0].geometry.location;
+ //          } else {
+ //            alert('Geocode was not successful for the following reason: ' + status);
+ //          }
+ //        });
+ //      }
 
 	render() {
-		// console.log(this.props.navBar);
+		console.log(this.props.navBar);
 		// console.log(this.props.google);
 		var google=this.props.google;
 
